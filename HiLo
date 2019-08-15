@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+public class HiLotest111 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int guess=0;
+
+        System.out.println("Welcome to HiLo!");
+        System.out.println("Choose degree of difficulty level?");
+        System.out.println("1) Easy: 0-10");
+        System.out.println("2) Medium: 0-100");
+        System.out.println("3) Hard: 0-1000");
+        System.out.println("4) Coustome");
+
+        int choice = sc.nextInt();
+        
+
+        switch(choice){
+            case 1: guess = playGame(10);
+            System.out.println("Number of guesses uesd: "+guess);
+                break;
+            case 2: guess = playGame(100);
+            System.out.println("Number of guesses uesd: "+guess);
+                break;
+            case 3: guess = playGame(1000);
+            System.out.println("Number of guesses uesd: "+guess);
+                break; 
+            case 4: guess = costumePlayGame();
+                if(guess <= 1){
+                    System.out.println("Better luck next time.");
+                }else{
+                 System.out.println("You did it with "+guess+" guesses.");
+                }
+                break; 
+            default:
+                
+        }
+        
+
+    }
+    public static int costumePlayGame(){
+        int maxNumber,lowNumber,trys,startTrys;
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Lowest Number: ");
+        lowNumber = sc.nextInt();
+        System.out.print("Highest Number: ");
+        maxNumber = sc.nextInt();
+        System.out.print("Trys: ");
+        trys = sc.nextInt();
+        startTrys = trys;
+        int answer = (int)(Math.random() * maxNumber) + lowNumber;
+        int guess = 0;
+
+        while (guess != answer && trys >= 1){
+
+            System.out.println("Guess a number between "+ lowNumber +"-" + maxNumber + " Try: "+ trys);             
+            guess = sc.nextInt();
+            trys--;
+            
+            
+            giveResponce(answer, guess);
+        }
+        return startTrys - trys;
+    }
+
+    public static int playGame(int maxNumber) {
+        Scanner sc = new Scanner(System.in);
+        int answer = (int)(Math.random() * maxNumber) + 1;
+        int guess = 0;
+        int nrOfGuesses = 0;
+
+        while (guess != answer){
+            System.out.println("Guess a number between 1-" + maxNumber); 
+            nrOfGuesses++;
+            guess = sc.nextInt();
+
+            giveResponce(answer, guess);
+        };
+        return nrOfGuesses;
+    }
+    public static void giveResponce(int answer, int guess) {
+
+        if (guess < answer) {
+            System.out.println("To Low");
+        } else if (guess > answer) {
+            System.out.println("To Heigh");
+        } else if (guess == answer) {
+            System.out.println("Congratulations!");
+        }
+    }
+}
+
+// Somthing is wrong....
